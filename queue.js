@@ -1,39 +1,38 @@
-//Stack with Singly Linked List and pushing and popping from the beginning
+//With Singly Linked List
+//Enqueue --> Add at the end of the list
+//Dequeue --> Remove from the beginning ofthe list
 
 class Node{
-    constructor(val){
-        this.val = val;
+    constructor(value){
+        this.value = value;
         this.next = null;
     }
 }
-
-class Stack{
+class Queue{
     constructor(){
         this.first = null;
         this.last = null;
         this.size = 0;
     }
-    push(val){
+    enqueue(val){
         let newNode = new Node(val);
         if (!this.first){
             this.first = newNode;
             this.last = newNode;
         }else{
-            let prevNode = this.first;
-            this.first = newNode;
-            newNode.next = prevNode;    
+            this.last.next = newNode;
+            this.last = newNode;
         }
         this.size++;
         return this.size;
     }
-    pop(){
-        let prevNode = this.first;
+    dequeue(){
         if (!this.first){
             return null;
-        }else{
-            this.first = prevNode.next;
-            prevNode.next = null;
         }
+        let prevNode = this.first;
+        this.first = this.first.next;
+        prevNode.next = null
         this.size--;
         if (this.size === 0){
             this.last = null;
@@ -41,6 +40,4 @@ class Stack{
         return prevNode;
     }
 }
-
-
-let stack = new Stack();
+let q = new Queue();
